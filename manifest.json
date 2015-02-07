@@ -1,0 +1,17 @@
+{
+    "name": "helloworld.sandvichvonnom",
+    "description": "description of HelloWorld",
+    "architecture": "all",
+    "title": "HelloWorld",
+    "hooks": {
+        "helloworld": {
+            "apparmor": "helloworld.apparmor",
+            "desktop":  "helloworld.desktop"
+        }
+    },
+    "version": "0.1",
+    "maintainer": "Joshua Scheel <jscheel42@gmail.com>",
+    "framework" : "ubuntu-sdk-14.10"
+}
+
+
