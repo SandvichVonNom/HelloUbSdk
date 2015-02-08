@@ -26,32 +26,38 @@ MainView {
     width: units.gu(100)
     height: units.gu(75)
 
-    Page {
-        title: i18n.tr("Simple")
+    Page { id: page
+        // title: i18n.tr("Simple")
 
-        Column {
+        Column { id: column
             spacing: units.gu(1)
             anchors {
                 margins: units.gu(2)
-                fill: parent
+                left: parent
             }
+            width: parent.width/2
 
-            Label {
-                id: label
-                objectName: "label"
-
-                text: i18n.tr("Hello..")
-            }
-
-            Button {
+            Button { id: button
                 objectName: "button"
+                anchors.top: label.bottom
                 width: parent.width
-
                 text: i18n.tr("Tap me!")
-
                 onClicked: {
-                    label.text = i18n.tr("..world!")
-                    console.log("Hello Condsole!")
+                    rectangletext.text = i18n.tr("Gentleman")
+                    console.log("Hello Console!")
+                }
+            }
+
+            Rectangle { id: rectangle
+                objectName: "rectangle"
+                anchors.top: button.bottom
+                width: parent.width
+                height: units.gu(3)
+                color: "white"
+                Text { id: rectangletext
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.verticalCenter: parent.verticalCenter
+                    text: "Greetings"
                 }
             }
         }
