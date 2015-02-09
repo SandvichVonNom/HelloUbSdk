@@ -95,7 +95,16 @@ MainView {
                      id: subredListView
                      anchors.fill: parent
                      model: SubredditListModel {}
+                     snapMode: ListView.SnapToItem
                      onCurrentItemChanged: rectangletext.text = subredListView.currentItem.itemData
+                     highlight: Component {
+                         Rectangle {
+                             width: 200
+                             height: 20
+                             color: "blue"
+                         }
+                     }
+
                      delegate: Component {
                          id: subredditDelegate
                          Item {
