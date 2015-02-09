@@ -39,9 +39,18 @@ MainView {
 
             Rectangle {
                 id: corner
-                width: parent.width/3
+                width: units.gu(20)
                 height: units.gu(5)
-                color: "purple"
+                color: "white"
+                z: 1
+                Text {
+                    x: units.gu(1)
+                    y: units.gu(1)
+                    text: "QReddit"
+                    font.underline: true
+                    font.bold: true
+                    font.pointSize: 16
+                }
             }
 
             Row {
@@ -65,7 +74,6 @@ MainView {
                 Button {
                     id: button
                     objectName: "button"
-                    //width: parent.width/2
                     height: parent.height
                     text: i18n.tr("Tap me!")
                     onClicked: {
@@ -79,32 +87,43 @@ MainView {
                 id: leftrectangle
                 width: corner.width
                 height: parent.height - corner.height
-                color: "lightblue"
+                color: "black"
 
-                Component {
-                    id: subredditListDelegate
-                    Item {
-                        id: itemsubreddit
-                        width: leftrectangle.width
-                        height: 50
-                        Rectangle {
-                            id: singlesubreddit
-                            color: "pink"
-                            width: itemsubreddit.width
-                            height: itemsubreddit.height - 10
-                            Text {
-                                text: name
-                                anchors.verticalCenter: parent.verticalCenter
-                            }
-                        }
-                    }
-                }
 
-                ListView {
-                    width: leftrectangle.width; height: leftrectangle.height
-                    model: SubredditListModel {}
-                    delegate: subredditListDelegate
-                }
+
+                 ListView {
+                     id: subredListView
+                     anchors.fill: parent
+                     model: SubredditListModel {}
+                     onCurrentItemChanged: rectangletext.text = subredListView.currentItem.itemData
+                     delegate: Component {
+                         id: subredditDelegate
+                         Item {
+                             property variant itemData: model.name
+                             width: leftrectangle.width
+                             height: subredrec.height + units.gu(.5)
+                             Rectangle {
+                                 id: subredrec
+                                 width: leftrectangle.width
+                                 height: units.gu(5)
+                                 color: "white"
+                                 Text {
+                                     id: listitem
+                                     x: units.gu(1)
+                                     anchors.verticalCenter: subredrec.verticalCenter
+                                     text: '<b>' + name + '</b>'
+                                 }
+                             }
+                             MouseArea{
+                                 id: itemMouseArea
+                                 anchors.fill: parent
+                                 onClicked: {
+                                     subredListView.currentIndex = index
+                                 }
+                             }
+                         }
+                     }
+                 }
             }
 
             Rectangle {
