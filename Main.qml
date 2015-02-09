@@ -27,20 +27,41 @@ MainView {
     height: units.gu(75)
 
     Page { id: page
-        // title: i18n.tr("Simple")
+        title: i18n.tr("Simple")
 
-        Column { id: column
+        Rectangle { id: corner
+            x: units.gu(1)
+            y: units.gu(1)
+            width: units.gu(10)
+            height: units.gu(5)
+            color: "purple"
+        }
+
+        Row { id: topbar
             spacing: units.gu(1)
-            anchors {
-                margins: units.gu(2)
-                left: parent
+            anchors.margins: units.gu(1)
+            anchors.verticalCenter: corner.verticalCenter
+            anchors.left: corner.right
+            height: corner.height
+
+            Button { id: topbutton
+                objectName: "topbutton"
+                height: parent.height
+                text: i18n.tr("Boop This")
+                onClicked: rectangletext.text = i18n.tr("Topside")
             }
-            width: parent.width/2
+
+        }
+
+        Column { id: leftcolumn
+            spacing: units.gu(1)
+            anchors.margins: units.gu(1)
+            anchors.top: corner.bottom
+            anchors.horizontalCenter: corner.horizontalCenter
+            width: corner.width
 
             Button { id: button
                 objectName: "button"
-                anchors.top: label.bottom
-                width: parent.width
                 text: i18n.tr("Tap me!")
                 onClicked: {
                     rectangletext.text = i18n.tr("Gentleman")
@@ -50,7 +71,6 @@ MainView {
 
             Rectangle { id: rectangle
                 objectName: "rectangle"
-                anchors.top: button.bottom
                 width: parent.width
                 height: units.gu(3)
                 color: "white"
